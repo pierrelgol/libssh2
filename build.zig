@@ -71,6 +71,11 @@ pub fn build(b: *std.Build) void {
             ssh2_lib.root_module.linkSystemLibrary("mbedtls", .{});
             ssh2_lib.root_module.linkSystemLibrary("mbedcrypto", .{});
             ssh2_lib.root_module.linkSystemLibrary("mbedx509", .{});
+        } else if (b.lazyDependency("mbedtls", .{
+            .target = target,
+            .optimize = optimize,
+        })) |mbedtls_dependency| {
+            ssh2_lib.root_module.linkLibrary(mbedtls_dependency.artifact("mbedtls"));
         }
     }
 
@@ -79,6 +84,11 @@ pub fn build(b: *std.Build) void {
         if (link_system_crypto) {
             ssh2_lib.root_module.linkSystemLibrary("ssl", .{});
             ssh2_lib.root_module.linkSystemLibrary("crypto", .{});
+        } else if (b.lazyDependency("openssl", .{
+            .target = target,
+            .optimize = optimize,
+        })) |openssl_dependency| {
+            ssh2_lib.root_module.linkLibrary(openssl_dependency.artifact("openssl"));
         }
     }
 
