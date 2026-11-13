@@ -44,6 +44,21 @@ pub fn build(b: *std.Build) void {
         .HAVE_NETINET_IN_H = !is_windows,
         .HAVE_ARPA_INET_H = !is_windows,
         .HAVE_INTTYPES_H = true,
+        // Without sys/un.h libssh2 builds no ssh-agent support on Unix.
+        .HAVE_SYS_UN_H = !is_windows,
+        .HAVE_UNISTD_H = !is_windows,
+        .HAVE_SYS_SELECT_H = !is_windows,
+        .HAVE_SYS_IOCTL_H = !is_windows,
+        .HAVE_SYS_TIME_H = !is_windows,
+        .HAVE_GETTIMEOFDAY = !is_windows,
+        .HAVE_POLL = !is_windows,
+        .HAVE_SELECT = !is_windows,
+        .HAVE_O_NONBLOCK = !is_windows,
+        .HAVE_STRTOLL = true,
+        .HAVE_SNPRINTF = true,
+        // Key material is wiped with a call the compiler may not optimise away.
+        .HAVE_MEMSET_S = target.result.os.tag.isDarwin(),
+        .HAVE_EXPLICIT_BZERO = target.result.os.tag == .linux,
     });
 
     const ssh2_lib = b.addLibrary(.{
