@@ -56,9 +56,6 @@ pub fn build(b: *std.Build) void {
         .HAVE_O_NONBLOCK = !is_windows,
         .HAVE_STRTOLL = true,
         .HAVE_SNPRINTF = true,
-        // Key material is wiped with a call the compiler may not optimise away.
-        .HAVE_MEMSET_S = target.result.os.tag.isDarwin(),
-        .HAVE_EXPLICIT_BZERO = target.result.os.tag == .linux,
     });
 
     const ssh2_lib = b.addLibrary(.{
