@@ -14,8 +14,8 @@
             .lazy = true,
         },
         .openssl = .{
-            .url = "git+https://github.com/pierrelgol/openssl?ref=zig#00aed68ff4a483b9e5c56d0c3e2bf3fae11ea982",
-            .hash = "openssl-3.3.2-TC9C3UK5ZAD1PUVzJGPdRfHtcQvB9FB2ProY6VF-wyD0",
+            .url = "git+https://github.com/pierrelgol/openssl?ref=zig#57a91e2cafb3468238f437d26b87372afa2bf338",
+            .hash = "openssl-3.3.2-TC9C3Y-5ZAAojFNmL5awsNZfsHpV72I0VW5BXz3LKh2e",
             .lazy = true,
         },
         .mbedtls = .{
